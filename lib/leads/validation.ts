@@ -1,21 +1,23 @@
-import { phoneDigits, formatPhone } from "./formatting";
+import { normalizeWhatsapp, validEmail } from "./rules";
+import { formatPhone } from "./formatting";
 import { cameraOptions, emptyFields, internetOptions, locationTypes, stepNames, type FieldName, type LeadDraft, type LeadErrors, type LeadFields, type TextFieldName } from "./types";
 
 export const maxLengths: Record<TextFieldName, number> = { nome: 80, whatsapp: 16, email: 120, empresa: 80, cidade: 60, tipo: 80, cameras: 40, internet: 40, mensagem: 600 };
 export const stepFields: FieldName[][] = [["nome", "whatsapp"], ["empresa", "cidade", "tipo"], ["cameras", "internet"], ["email", "mensagem"], ["consentimento"]];
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 export function invalidField(fields: LeadFields, name: FieldName): boolean {
   switch (name) {
     case "nome": case "cidade": return fields[name].trim().length < 2;
-    case "whatsapp": return !/^(\d{10}|\d{11})$/.test(phoneDigits(fields.whatsapp));
-    case "email": return fields.email.trim() !== "" && !emailPattern.test(fields.email.trim());
+    case "whatsapp": return normalizeWhatsapp(fields.whatsapp) === null;
+    case "email": return fields.email.trim() !== "" && !validEmail(fields.email.trim());
     case "tipo": return !locationTypes.some(value => value === fields.tipo);
+    case "cameras": return !cameraOptions.some(value => value === fields.cameras);
+    case "internet": return !internetOptions.some(value => value === fields.internet);
     case "consentimento": return !fields.consentimento;
     default: return false;
   }
 }
 export function validate(fields: LeadFields, step?: number): LeadErrors {
-  const names: FieldName[] = step === undefined ? ["nome", "whatsapp", "email", "cidade", "tipo", "consentimento"] : stepFields[step];
+  const names: FieldName[] = step === undefined ? ["nome", "whatsapp", "email", "cidade", "tipo", "cameras", "internet", "consentimento"] : stepFields[step];
   return Object.fromEntries(names.filter(name => invalidField(fields, name)).map(name => [name, true]));
 }
 export function stepComplete(fields: LeadFields, step: number) {
@@ -35,7 +37,7 @@ export function restoreDraft(value: unknown): LeadDraft {
   if (!cameraOptions.some(v => v === fields.cameras)) fields.cameras = "";
   if (!internetOptions.some(v => v === fields.internet)) fields.internet = "";
   let step = Math.max(0, stepNames.findIndex(name => name === value.step));
-  for (const previous of [0, 1, 3]) {
+  for (const previous of [0, 1, 2, 3]) {
     if (previous < step && Object.keys(validate(fields, previous)).length) { step = previous; break; }
   }
   return { fields, step };

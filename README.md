@@ -16,11 +16,11 @@ filhos às fronteiras cliente. Hooks compartilham hidratação, media queries,
 movimento reduzido e observação de visibilidade. Sem JavaScript, o conteúdo não é
 ocultado por animações; a primeira tela do app e o FAQ nativo permanecem disponíveis.
 
-O formulário tem cinco etapas, validação, máscara brasileira, rascunho por aba,
-atribuição, transportes tipados e estados distintos de confirmação, falha e
-encaminhamento. Sem JavaScript ou antes da hidratação, campos desabilitados e sem
-nomes impedem exposição por GET. O contato original foi preservado: somente e-mail
-está configurado; abrir o aplicativo não confirma recebimento nem apaga o rascunho.
+O formulário preserva as cinco etapas, máscara, progresso e rascunho por aba.
+`POST /api/leads` valida e normaliza os dados no servidor e faz INSERT no Supabase
+com retorno mínimo. A confirmação só aparece após a inserção; erros preservam os
+campos. O envio usa proteção básica contra automação e bloqueio de cliques
+concorrentes. As credenciais ficam exclusivamente no servidor em `.env.local`.
 
 O adaptador de métricas filtra os eventos originais sem instalar rastreadores.
 Contratos, correções autorizadas e limites estão em [docs/lead-form.md](docs/lead-form.md).
@@ -37,7 +37,8 @@ npm audit
 
 Os estilos de componentes usam CSS Modules (`*.module.css`). O arquivo
 `app/globals.css` contém somente tokens e regras globais de base.
-Não há Tailwind, fontes remotas, SDKs de rastreamento ou backend de leads.
+Não há Tailwind, fontes remotas ou SDKs de rastreamento. O backend de leads usa
+a Data API do Supabase, sem dependências adicionais.
 
 ## Recursos preservados
 
@@ -84,7 +85,9 @@ Nenhum formulário foi enviado e nenhum aplicativo de e-mail foi aberto.
 - `components/ui/`: botões, cartões, títulos de seção, imagens da marca e estilos
   compartilhados pelos componentes.
 - `components/lead-form/`: apresentação e controle das cinco etapas e retornos.
-- `lib/leads/`: tipos, validação, formatação e transporte.
+- `lib/leads/`: tipos, validação, formatação, transporte e backend exclusivo do servidor.
+- `app/api/leads/`: inserção de leads e emissão do desafio assinado.
+- `database/schema.sql`: referência documental do schema e das permissões informados.
 - `lib/site-config.ts` e `lib/analytics.ts`: configuração e eventos filtrados.
 
 Os seletores compartilhados entre componentes usam atributos `data-*` locais

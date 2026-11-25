@@ -1,3 +1,4 @@
+export const leadErrorMessage = "Não foi possível enviar sua solicitação. Por favor, tente novamente.";
 export const stepNames = ["contato", "local", "estrutura", "detalhes", "confirmacao"] as const;
 export const locationTypes = ["Empresa ou escritório", "Galpão ou indústria", "Obra", "Comércio ou loja", "Várias unidades", "Outro"] as const;
 export const cameraOptions = ["Ainda não tenho", "1 a 4", "5 a 8", "9 a 16", "Mais de 16"] as const;
@@ -27,15 +28,12 @@ export type LeadConfig = {
   requestTimeoutMs: number;
   responseContract: ResponseContract;
 };
-export type Handoff = { method: "whatsapp" | "email"; url: string };
 export type FailureReason = "http" | "network" | "timeout" | "aborted" | "response";
 export type TransportResult = { kind: "confirmed" } | { kind: "failed"; reason: FailureReason; status?: number };
 export type SubmissionState =
   | { kind: "idle" }
   | { kind: "sending" }
-  | { kind: "confirmed"; lead: LeadPayload; handoff: Handoff | null }
-  | { kind: "handoff"; handoff: Handoff }
-  | { kind: "failed"; reason: FailureReason; alternative: Handoff | null }
-  | { kind: "unconfigured" }
+  | { kind: "confirmed" }
+  | { kind: "failed"; reason: FailureReason }
   | { kind: "blocked" }
   | { kind: "invalid" };

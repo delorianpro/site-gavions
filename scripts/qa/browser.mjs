@@ -51,8 +51,6 @@ function fixtureHtml(html, config) {
     });
     if (!replaced)
         throw new Error("Fixture RSC não encontrado; revise o harness para a versão instalada do Next.");
-    if (!config.leadEndpoint && !config.whatsappNumber && !config.contactEmail)
-        html = html.replace(/(data-cfg-warning="") hidden=""/, "$1");
     return html;
 }
 export async function openHarness(output) {
@@ -87,7 +85,8 @@ export async function openHarness(output) {
     }
     // A local deny proxy also blocks browser background traffic outside CDP.
     const denyProxy = createServer((request, response) => { request.resume(); response.writeHead(403).end(); });
-    denyProxy.on("connect", (request, socket) => socket.end("HTTP/1.1 403 Forbidden\r\n\r\n"));
+    denyProxy.on("connect", (request, socket) => { socket.on("error", () => {}); socket.end("HTTP/1.1 403 Forbidden\r\n\r\n"); });
+    denyProxy.on("connection", socket => socket.on("error", () => {}));
     denyProxy.on("upgrade", (request, socket) => socket.destroy());
     await new Promise((resolve, reject) => { denyProxy.once("error", reject); denyProxy.listen(0, "127.0.0.1", resolve); });
     const proxyUrl = `http://127.0.0.1:${denyProxy.address().port}`;
@@ -144,6 +143,11 @@ export async function openHarness(output) {
             if (message.method === "Fetch.requestPaused") {
                 const { request, requestId, resourceType } = message.params;
                 const fixture = fixtures.get(label);
+                if (request.url === baseUrl + "/api/leads/token" && request.method === "GET" && fixture) {
+                    logs.requests.push({ label, method: "GET", url: request.url, mocked: true });
+                    await send("Fetch.fulfillRequest", { requestId, responseCode: 200, responseHeaders: [{ name: "Content-Type", value: "application/json" }], body: Buffer.from(JSON.stringify({ token: "synthetic-qa-token", waitMs: fixture.mock?.tokenWaitMs ?? 0 })).toString("base64") }, message.sessionId);
+                    return;
+                }
                 if (request.url === baseUrl + "/__lead-mock" && request.method === "POST" && fixture) {
                     posts.push({ label, request });
                     logs.requests.push({ label, method: "POST", url: request.url, mocked: true });
@@ -263,7 +267,7 @@ function preload({ extraInit, original, noObserver, freezeSimulation, readOnly }
     window.__qa={observers:[],activeIntervals:{},activeTimers:{},timerEvents:[]};
     {const add=EventTarget.prototype.addEventListener,remove=EventTarget.prototype.removeEventListener;window.__listeners=[];EventTarget.prototype.addEventListener=function(type,fn,...args){if(['visibilitychange','pagehide','blur'].includes(type))window.__listeners.push({target:this,type,fn,active:true});return add.call(this,type,fn,...args)};EventTarget.prototype.removeEventListener=function(type,fn,...args){const found=window.__listeners.find(e=>e.active&&e.target===this&&e.type===type&&e.fn===fn);if(found)found.active=false;return remove.call(this,type,fn,...args)}}
     {const set=window.setTimeout.bind(window),clear=window.clearTimeout.bind(window),setInterval=window.setInterval.bind(window),clearInterval=window.clearInterval.bind(window);
-     const watched=[30,450,1400,1700,2300,2900,3500,4100,4700,9000],simulation=[30,1700,2300,2900,3500,4100,4700,9000],jobs=new Map();let synthetic=0,now=0;
+     const watched=[30,250,450,1400,1700,2300,2900,3500,4100,4700,9000],simulation=[30,1700,2300,2900,3500,4100,4700,9000],jobs=new Map();let synthetic=0,now=0;
      window.setTimeout=(fn,ms,...args)=>{if(${freezeSimulation}&&simulation.includes(ms)){const id=--synthetic;jobs.set(id,{due:now+ms,fn,args});window.__qa.activeTimers[id]=ms;return id}let id;id=set((...params)=>{delete window.__qa.activeTimers[id];if(watched.includes(ms))window.__qa.timerEvents.push({delay:ms,time:performance.now()});typeof fn==='function'?fn(...params):eval(fn)},ms,...args);if(watched.includes(ms))window.__qa.activeTimers[id]=ms;return id};
      window.clearTimeout=id=>{jobs.delete(id);delete window.__qa.activeTimers[id];return clear(id)};
      window.setInterval=(fn,ms,...args)=>{if(${freezeSimulation}&&ms===1000){const id=--synthetic;jobs.set(id,{due:now+ms,fn,args,interval:ms});window.__qa.activeIntervals[id]=ms;return id}const id=setInterval(fn,ms,...args);window.__qa.activeIntervals[id]=ms;return id};

@@ -6,3 +6,8 @@
 .waFloat:hover { transform: scale(1.06); }
 .waFloat [data-icon] { font-size: 30px; }
 @media (max-width: 767px) { .waFloat[data-cta-visible] { bottom: calc(82px + env(safe-area-inset-bottom)); } }
+.aboveWhatsapp { --back-to-top-bottom: 86px; }
+@media (max-width: 767px) {
+  .aboveMobileCta { --back-to-top-bottom: 82px; }
+  .aboveMobileCta.aboveWhatsapp { --back-to-top-bottom: 150px; }
+}
