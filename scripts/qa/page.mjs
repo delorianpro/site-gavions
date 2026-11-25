@@ -10,9 +10,12 @@ function check(name, pass) { checks.push({ name, pass: Boolean(pass) }); if (!pa
 try {
     for (const width of [1440, 1024, 980, 979, 768, 390, 380, 320]) {
         const session = await harness.createPage(`page-${width}`, { width, reduced: true, readOnly: true });
-        const state = await harness.evaluate(session, `({width:innerWidth,overflow:Math.max(0,document.documentElement.scrollWidth-innerWidth),images:[...document.images].map(e=>{const r=e.getBoundingClientRect();return{src:e.getAttribute('src'),alt:e.alt,complete:e.complete,naturalWidth:e.naturalWidth,naturalHeight:e.naturalHeight,width:r.width,height:r.height,attributeWidth:+e.getAttribute('width'),attributeHeight:+e.getAttribute('height')}})})`);
+        // picture may choose a source with its own intrinsic dimensions. Hidden
+        // campaign artwork is not fetched at mobile breakpoints by Chromium.
+        await harness.evaluate(session, `Promise.all([...document.images].filter(e=>e.getBoundingClientRect().width>0).map(e=>e.decode().catch(()=>{})))`);
+        const state = await harness.evaluate(session, `({width:innerWidth,overflow:Math.max(0,document.documentElement.scrollWidth-innerWidth),images:[...document.images].map(e=>{const r=e.getBoundingClientRect();const source=e.parentElement?.tagName==='PICTURE'?[...e.parentElement.querySelectorAll('source')].find(s=>(!s.media||matchMedia(s.media).matches)&&s.srcset):null;const dimensions=source?.hasAttribute('width')?source:e;return{src:e.getAttribute('src'),alt:e.alt,complete:e.complete,naturalWidth:e.naturalWidth,naturalHeight:e.naturalHeight,width:r.width,height:r.height,attributeWidth:+dimensions.getAttribute('width'),attributeHeight:+dimensions.getAttribute('height')}})})`);
         views.push(state);
-        check(`Recursos e proporções ${width}`, state.images.every(image => image.complete && image.naturalWidth > 0 && image.attributeWidth === image.naturalWidth && image.attributeHeight === image.naturalHeight && (!image.height || Math.abs(image.width / image.height - image.naturalWidth / image.naturalHeight) < .02)));
+        check(`Recursos e proporções ${width}`, state.images.every(image => (!image.width && !image.height) || (image.complete && image.naturalWidth > 0 && image.attributeWidth === image.naturalWidth && image.attributeHeight === image.naturalHeight && (!image.height || Math.abs(image.width / image.height - image.naturalWidth / image.naturalHeight) < .02))));
         check(`Sem rolagem horizontal ${width}`, state.overflow === 0);
         await harness.screenshot(session, `viewport-${width}.png`);
         if (width === 1440) {

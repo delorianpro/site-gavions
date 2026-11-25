@@ -28,7 +28,7 @@ export function LeadSection() {
                 <small>Sem compromisso.</small>
               </div></li>
           </ol>
-          <p className={styles.heritage}><Icon name="zap" />Da equipe Delorian, que já automatiza e mantém portões eletrônicos.</p>
+          <p className={styles.heritage}><Icon name="zap" />Desenvolvida pela Delorian, empresa especializada em automação, segurança eletrônica e tecnologias inteligentes de proteção patrimonial.</p>
         </Reveal>
         <LeadFormCard />
       </div>

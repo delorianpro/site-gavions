@@ -34,7 +34,7 @@ export function LeadFormFields({ values, errors, step, enabled, onTextChange, on
         <h4 id="step-local">Onde você quer proteger?</h4>
         <div className={styles.row2}>
           <div className={styles.field}>
-            <label htmlFor="f-empresa">{"Empresa "}<span className={styles.opt}>(opcional)</span></label>
+            <label htmlFor="f-empresa">{"Empresa "}</label>
             <input id="f-empresa" {...text("empresa")} type="text" autoComplete="organization" maxLength={80} />
           </div>
           <div className={styles.field}>
@@ -61,21 +61,23 @@ export function LeadFormFields({ values, errors, step, enabled, onTextChange, on
         <fieldset className={styles.field}>
           <legend>Quantas câmeras?</legend>
           <div className={styles.pills}>
-            <label><input type="radio" {...radio("cameras", "Ainda não tenho")} /><span>Ainda não tenho</span></label>
+            <label><input type="radio" {...radio("cameras", "Ainda não tenho")} required /><span>Ainda não tenho</span></label>
             <label><input type="radio" {...radio("cameras", "1 a 4")} /><span>1 a 4</span></label>
             <label><input type="radio" {...radio("cameras", "5 a 8")} /><span>5 a 8</span></label>
             <label><input type="radio" {...radio("cameras", "9 a 16")} /><span>9 a 16</span></label>
             <label><input type="radio" {...radio("cameras", "Mais de 16")} /><span>Mais de 16</span></label>
           </div>
+          <p className={[styles.err, errors.cameras && styles.show].filter(Boolean).join(" ")} id="e-cameras">Escolha a quantidade de câmeras.</p>
         </fieldset>
         <fieldset className={styles.field}>
           <legend>Internet no local</legend>
           <div className={styles.pills}>
-            <label><input type="radio" {...radio("internet", "Fixa (banda larga)")} /><span>Fixa</span></label>
+            <label><input type="radio" {...radio("internet", "Fixa (banda larga)")} required /><span>Fixa</span></label>
             <label><input type="radio" {...radio("internet", "Só 4G")} /><span>Só 4G</span></label>
             <label><input type="radio" {...radio("internet", "Não tem ainda")} /><span>Não tem ainda</span></label>
             <label><input type="radio" {...radio("internet", "Não sei")} /><span>Não sei</span></label>
           </div>
+          <p className={[styles.err, errors.internet && styles.show].filter(Boolean).join(" ")} id="e-internet">Escolha a internet do local.</p>
         </fieldset>
       </section>
       <section className={styles.formStep} data-form-step="detalhes" aria-labelledby="step-detalhes" hidden={step !== 3}>

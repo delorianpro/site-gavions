@@ -52,6 +52,9 @@ Em outro terminal, defina a URL correspondente e, opcionalmente, a pasta de saí
 export QA_BASE_URL=http://127.0.0.1:3107
 # QA_OUTPUT_DIR deve apontar para uma pasta externa ao checkout.
 node scripts/qa/leads.mjs
+node scripts/qa/leads-api.mjs
+node scripts/qa/client-secrets.mjs
+node scripts/qa/black-friday.mjs
 node scripts/qa/form.mjs
 node scripts/qa/interactions.mjs
 node scripts/qa/page.mjs
@@ -60,8 +63,9 @@ node scripts/qa/accessibility.mjs
 ```
 
 Cada comando informa o resultado e/ou grava `report.json` na pasta da suíte.
-Código de saída diferente de zero sinaliza falha. `leads.mjs` não exige servidor
-nem navegador. Os demais exigem a aplicação e o Chrome/Chromium.
+Código de saída diferente de zero sinaliza falha. `leads.mjs`, `leads-api.mjs` e `black-friday.mjs` não exigem servidor nem navegador.
+`client-secrets.mjs` exige build pronto e as variáveis locais, mas não faz rede
+nem imprime credenciais. Os demais exigem a aplicação e o Chrome/Chromium.
 
 Para referência original, configure o caminho correspondente ao seu ambiente:
 
@@ -79,8 +83,11 @@ a regressão da aplicação disponível em checkouts que não tenham o site anti
 
 | Script | Responsabilidade |
 | --- | --- |
-| `leads.mjs` | Validação, máscara, saneamento, codificação, contratos de resposta, timeout, cancelamento e filtragem de analytics |
-| `form.mjs` | Cinco etapas, teclado, foco, persistência, composição, honeypot, duplicidade, falhas, alternativas, ausência de destino e proteção sem JS/pré-hidratação |
+| `leads.mjs` | Validação, máscara, saneamento, POST permitido, confirmação explícita, timeout, cancelamento e filtragem de analytics |
+| `form.mjs` | Cinco etapas, teclado, foco, persistência, composição, honeypot, duplicidade, desafio, falhas, estados responsivos e proteção sem JS/pré-hidratação |
+| `leads-api.mjs` | Handlers com fetch/relógio/ambiente fictícios: normalização, obrigatórios/opcionais, listas, consentimento, origem, token, limites e falhas do Supabase |
+| `client-secrets.mjs` | Procura valores e referências de credenciais no bundle público e HTML pré-renderizado, sem exibi-los |
+| `black-friday.mjs` | Regressão do calendário, contador e retomada da campanha |
 | `interactions.mjs` | Cabeçalho, abas, FAQ, reveals, CTA móvel, sequência/replay/limpeza da simulação e movimento reduzido |
 | `page.mjs` | Avisos/proporções das imagens em oito larguras, metadados, IDs, alt, reflow, ano e fallback sem JS |
 | `simulation.mjs` | Contraste sobre fundos rasterizados reais, estados parciais/concluídos, replay, movimento reduzido e capturas |
@@ -113,6 +120,8 @@ para revisão manual. Capturas não são comparadas pixel a pixel entre engines.
 - Nos ensaios que exercitam o formulário, sua configuração é substituída na resposta HTML/RSC do
   navegador por e-mail `qa@example.invalid`, número fictício ou endpoint local
   interceptado. A configuração da aplicação não é editada.
+- GET de desafio `/api/leads/token` também é simulado no CDP. O POST nunca
+  alcança a rota real que acessaria o Supabase.
 - A leitura de página sem fixture bloqueia também cliques, teclado e submissões
   no formulário; nenhum POST é permitido nesse modo.
 - Aberturas de janela, beacons e cliques externos são bloqueados. Testes que

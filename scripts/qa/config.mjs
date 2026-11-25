@@ -35,12 +35,12 @@ export function outputDir(name) {
 }
 export const chromePath = process.env.QA_CHROME_BIN || "google-chrome";
 export const fakeLeadConfig = {
-    leadEndpoint: "",
+    leadEndpoint: baseUrl + "/__lead-mock",
     leadEndpointFormat: "json",
     whatsappNumber: "",
     contactEmail: "qa@example.invalid",
-    requestTimeoutMs: 10000,
-    responseContract: { kind: "http-status" },
+    requestTimeoutMs: 15000,
+    responseContract: { kind: "json", field: "ok", value: true },
 };
 export function safeFixture(config) {
     if (config.leadEndpoint && config.leadEndpoint !== `${baseUrl}/__lead-mock`)

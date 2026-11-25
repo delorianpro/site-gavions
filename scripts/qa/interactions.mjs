@@ -109,6 +109,8 @@ try {
     }
     await writeFile(h.output + '/timing.json', JSON.stringify(timing, null, 2));
     const replay = await h.createPage('replay');
+    // The campaign clock is persistent; only simulation-owned intervals must end.
+    const persistentIntervals = await h.evaluate(replay, `Object.keys(window.__qa.activeIntervals)`);
     await h.evaluate(replay, `document.querySelector('[data-sim-cam]').scrollIntoView({block:'center',behavior:'instant'})`);
     await sleep(2500);
     await h.evaluate(replay, `document.querySelector('[data-sim-replay]').click()`);
@@ -127,7 +129,7 @@ try {
     const reduced = await getState(replay);
     check('live reduced motion completes without flashing', reduced.stage === '6' && reduced.active === 6 && !reduced.siren && reduced.lit && reduced.clock === '02:14:09', reduced);
     const timers = await h.evaluate(replay, `({intervals:window.__qa.activeIntervals,timers:window.__qa.activeTimers,pending:document.querySelectorAll('[data-reveal-state="pending"]').length,scroll:getComputedStyle(document.documentElement).scrollBehavior})`);
-    check('motion change cleans timers and shows reveal content', Object.keys(timers.intervals).length === 0 && Object.keys(timers.timers).length === 0 && timers.pending === 0 && timers.scroll === 'auto', timers);
+    check('motion change cleans timers and shows reveal content', Object.keys(timers.intervals).every(id => persistentIntervals.includes(id)) && Object.keys(timers.timers).length === 0 && timers.pending === 0 && timers.scroll === 'auto', timers);
     for (const original of modes) {
         const sid = await h.createPage((original ? 'original' : 'next') + '-reduced', { original, reduced: true });
         await h.evaluate(sid, `document.querySelector('[data-sim-cam]').scrollIntoView({block:'center',behavior:'instant'})`);
