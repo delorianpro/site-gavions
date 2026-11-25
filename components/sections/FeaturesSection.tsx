@@ -7,9 +7,8 @@ export function FeaturesSection() {
     <section className={styles.section} id="recursos">
       <div className={styles.wrap}>
         <SectionHeading eyebrow="Recursos" title="Tudo o que a segurança da sua empresa precisa" />
-        <div className={`${styles.grid} ${styles.g3}`}>
+        <div className={`${styles.grid} ${styles.g4}`}>
           <FeatureCard delay={0} icon="sparkles" title="Detecção por inteligência artificial">Pessoas, carros, motos, bicicletas, ônibus, caminhões, cães e gatos. Você escolhe quais objetos geram alerta.</FeatureCard>
-          <FeatureCard delay={70} icon="bell" title="Alerta que fura o silencioso">No Android toca no volume de alarme; no iPhone chega como alerta crítico. De madrugada, você acorda.</FeatureCard>
           <FeatureCard delay={140} icon="wa" title="WhatsApp com foto">Mensagem com o que foi visto, a câmera, o horário e o link do painel, no texto que você preferir.</FeatureCard>
           <FeatureCard delay={210} icon="siren" title="Sirene e refletores automáticos">Disparam junto com o alerta. A sirene tem tempo limite configurável e silencia pelo app; os refletores apagam sozinhos.</FeatureCard>
           <FeatureCard delay={280} icon="clock" title="Turnos por câmera">Até seis períodos por dia, inclusive virando a madrugada. Cada câmera no seu turno, e feriados por programação especial.</FeatureCard>

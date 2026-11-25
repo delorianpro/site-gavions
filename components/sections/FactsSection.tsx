@@ -11,15 +11,11 @@ export function FactsSection() {
         </div>
         <div className={styles.fact}>
           <b>8</b>
-          <span>tipos de objeto reconhecidos: pessoas, veículos e animais</span>
+          <span>tipos de objetos reconhecidos pela IA, incluindo pessoas, veículos e animais.</span>
         </div>
         <div className={styles.fact}>
           <b>30 s</b>
           <span>entre cada sinal de vida enviado à Central Gavions</span>
-        </div>
-        <div className={styles.fact}>
-          <b>0</b>
-          <span>portas abertas no roteador da sua empresa</span>
         </div>
       </div>
     </section>

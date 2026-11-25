@@ -1,4 +1,5 @@
 import { CtaTarget } from "@/components/layout/CtaTarget";
+import { BlackFridayCampaign } from "@/components/layout/BlackFridayCampaign";
 import { Button } from "@/components/ui/Button";
 import { HeroScreen } from "@/components/app-preview/screens/HeroScreen";
 import { Icon } from "@/components/icons/Icon";
@@ -10,6 +11,7 @@ export function HeroSection() {
   return (
     <section className={styles.hero} id="topo">
       <div className={styles.heroBg} aria-hidden="true"></div>
+      <BlackFridayCampaign variant="desktop" />
       <div className={`${shared.wrap} ${styles.heroIn}`}>
         <div className={styles.heroCopy}>
           <p className={shared.eyebrow}><span className={shared.dot}></span>Vigilância inteligente para empresas</p>
@@ -22,7 +24,7 @@ export function HeroSection() {
           <ul className={styles.trust}>
             <li><Icon name="check" />Demonstração sem compromisso</li>
             <li><Icon name="check" />Gravação no seu local, não na nuvem</li>
-            <li><Icon name="check" />Funciona com internet 4G</li>
+            <li><Icon name="check" />Funciona com internet Wi-Fi e 4G</li>
           </ul>
         </div>
         <div className={styles.heroVisual} aria-hidden="true">
