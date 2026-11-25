@@ -55,7 +55,7 @@ export function ComparisonSection() {
               </tr>
               <tr>
                 <th scope="row">Vários imóveis com um login</th>
-                <td><span className={styles.n} role="img" aria-label="Não">—</span></td>
+                <td><span className={styles.p}>Limitado</span></td>
                 <td className={styles.us}><span className={styles.y} role="img" aria-label="Sim">✓</span></td>
               </tr>
               <tr>

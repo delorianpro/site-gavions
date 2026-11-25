@@ -1,0 +1,132 @@
+.desktop { display: none; }
+
+.mobile {
+  position: relative;
+  border-block: 1px solid #47ef22;
+  background: #0c0c0c;
+}
+
+.banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 8px var(--gutter);
+}
+
+.offer, .countdown { display: flex; flex-direction: column; }
+.offer { gap: 1px; }
+.name {
+  color: #fafdfa;
+  font-size: .75rem;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+.discount {
+  color: #49ef20;
+  font-size: clamp(1.75rem, 9vw, 1.875rem);
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -.04em;
+  white-space: nowrap;
+}
+.countdown { align-items: center; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.banner > .countdown { border-left: 1px solid #ffffff24; padding-left: 10px; }
+.ends { color: #e0e7df; font-size: .625rem; line-height: 1.1; font-weight: 650; letter-spacing: .035em; }
+.time { color: #49ef20; font-size: 1.5rem; line-height: 1.925rem; font-weight: 900; letter-spacing: -.045em; }
+.units { display: flex; justify-content: space-between; width: 100%; max-width: 110px; margin-top: 2px; padding-inline: 4px; color: #e0e7df; font-size: .5rem; line-height: 1.2; letter-spacing: .1em; }
+
+/* Arte única: faixa, conexão e pingente mantêm a proporção original. */
+@media (min-width: 1100px) {
+  .mobile { display: none; }
+  .desktop {
+    display: block;
+    position: absolute;
+    top: clamp(-25px, calc(1810px - 100vw), 60px);
+    top: -25px;
+    right: -15px;
+    width: clamp(200px, calc(24vw - 88px), 360px);
+    aspect-ratio: 1017 / 1546;
+    container-type: inline-size;
+    pointer-events: none;
+  }
+  .artwork { width: 100%; height: auto; }
+  /* Centro da superfície circular na arte 1017 × 1546: aproximadamente (736, 1292). */
+  .desktop > .countdown {
+    position: absolute;
+    left: 72.37%;
+    top: 83.57%;
+    width: 38%;
+    transform: translate(-50%, -50%);
+  }
+  .desktop .ends, .desktop .time, .desktop .units { color: #082702; }
+  .desktop .ends { font-size: 4cqw; font-weight: 800; }
+  .desktop .time { margin-top: 1.4cqw; font-size: 8.2cqw; line-height: 1; font-weight: 900; }
+  .desktop .units { max-width: none; margin-top: 1cqw; padding-inline: 1cqw; font-size: 3.4cqw; font-weight: 750; }
+}
+@media (max-width: 1500px){
+  .desktop { 
+        /* width: clamp(350px, calc(24vw - 88px), 800px);
+        top: -1;
+        right: -15px; */
+        
+          width: clamp(200px, calc(24vw - 50px), 380px);
+           right: -15px; 
+           top: -10px
+;   }
+}
+
+@media (max-width: 1490px){
+  .desktop { 
+
+          width: clamp(200px, calc(24vw - 0px), 380px);
+           right: -4px; 
+           top: 35px;
+;   }
+}
+@media (max-width: 1380px){
+  .desktop { 
+
+          width: clamp(200px, calc(24vw - 17px), 380px);
+           right: -12px; 
+           top: 30px;
+;   }
+}
+@media (max-width: 1285px){
+  .desktop { 
+          width: clamp(200px, calc(24vw - 30px), 380px);
+           right: -12px; 
+           top: 32px;
+;   }
+}
+@media (max-width: 1231px){
+  .desktop { 
+          width: clamp(200px, calc(24vw - 45px), 380px);
+           right: -10px; 
+           top: 32px;
+;   }
+}
+
+/* Arte quadrada exclusiva do desktop compacto; o contador permanece montado. */
+@media (1100px <= width < 1492px) {
+  .desktop {
+    top: -1px;
+    right: 0;
+    width: clamp(330px, calc(22vw + 150px), 800px);
+    translate: 25% 0;
+    aspect-ratio: 1;
+    right: -90px;
+
+      transform: rotate(1deg);
+
+  }
+  /* Centro do medalhão na nova arte 1254 × 1254: aproximadamente (766, 1006). */
+  .desktop > .countdown { left: 61.1%; top: 80.22%; width: 24%; }
+  .desktop .ends { font-size: 2.6cqw; }
+  .desktop .time { margin-top: .9cqw; font-size: 4.9cqw; }
+  .desktop .units { width: 88%; margin-top: .65cqw; padding-inline: .5cqw; font-size: 2.1cqw; }
+}

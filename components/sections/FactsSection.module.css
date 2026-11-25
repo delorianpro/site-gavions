@@ -1,6 +1,7 @@
 .facts { border-block: 1px solid var(--line); background: var(--bg-alt); }
 .factsIn { display: grid; grid-template-columns: 1fr 1fr; }
 .fact { padding: 24px 12px; display: flex; flex-direction: column; gap: 4px; }
+.fact:last-child { grid-column: 1 / -1; }
 .fact b { font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.5rem); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; background: linear-gradient(135deg, #fff, var(--bright)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .fact span { font-size: .88rem; color: var(--muted); line-height: 1.4; }
-@media (min-width: 860px) { .factsIn { grid-template-columns: repeat(4, 1fr); } .fact { padding: 30px 24px; border-left: 1px solid var(--line); } .fact:first-child { border-left: 0; padding-left: 0; } }
+@media (min-width: 860px) { .factsIn { grid-template-columns: repeat(3, 1fr); } .fact { padding: 30px 24px; border-left: 1px solid var(--line); } .fact:first-child { border-left: 0; padding-left: 0; } .fact:last-child { grid-column: auto; } }

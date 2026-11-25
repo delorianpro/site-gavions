@@ -19,6 +19,8 @@
   .hero { padding-bottom: 96px; }
   .heroIn { grid-template-columns: 1.08fr .92fr; gap: 40px; }
   .heroVisual { justify-self: end; margin-right: 40px; }
+  /* Folga fluida para a campanha, mantendo o breakpoint original da ilustração. */
+  .heroVisual [data-phone] { translate: clamp(-96px, max(calc(50vw - 816px), calc(3000px - 300vw)), 0px) 0; }
 }
 @media (max-width: 520px) { .ctaRow [data-button] { width: 100%; } }
 /* notificação e chips flutuantes do hero */
@@ -37,6 +39,8 @@
 .f2 { top: 56%; right: -96px; animation-delay: -4s; }
 .f3 { bottom: 10%; left: -130px; animation-delay: -6.5s; }
 @media (max-width: 1180px) { .f1 { left: -90px; } .f3 { left: -70px; } .f2 { right: -60px; } }
+/* Mantém o chip existente dentro da hero também nos notebooks menores. */
+@media (min-width: 1181px) and (max-width: 1280px) { .f2 { right: -60px; } }
 @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @media (max-width: 640px) {
   .heroVisual { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 0; }
