@@ -1,0 +1,12 @@
+.tableWrap { max-width: 900px; margin: 0 auto; border-radius: 20px; border: 1px solid var(--line); overflow: hidden; background: var(--surface); }
+.compare { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.compare th, .compare td { padding: 15px 18px; border-bottom: 1px solid var(--line); text-align: center; }
+.compare tbody tr:last-child > * { border-bottom: 0; }
+.compare thead th { font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+.compare thead th.us { color: var(--bright); }
+.compare tbody th { text-align: left; font-weight: 550; color: var(--text); }
+.compare .us { background: oklch(50% .17 142 / .12); }
+.compare .y { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: oklch(74% .19 150 / .16); color: var(--ok); font-weight: 800; }
+.compare .n { color: oklch(60% .012 150); font-weight: 700; }
+.compare .p { font-size: .82rem; color: var(--muted); }
+@media (max-width: 560px) { .compare th, .compare td { padding: 12px 10px; font-size: .86rem; } .compare thead th { font-size: .7rem; letter-spacing: .04em; } .compare .p { font-size: .74rem; } }

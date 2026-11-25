@@ -1,0 +1,5 @@
+.cam { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #0a1120; }
+.cam > svg { width: 100%; height: 100%; transition: filter .6s ease; }
+.cam::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, oklch(100% 0 0 / .025) 0 1px, transparent 1px 3px), radial-gradient(120% 90% at 50% 50%, transparent 55%, oklch(0% 0 0 / .45)); }
+.det { position: absolute; left: var(--x); top: var(--y); width: var(--w); height: var(--h); border: 2px solid var(--bright); border-radius: 4px; box-shadow: 0 0 0 1px oklch(0% 0 0 / .4), 0 0 18px oklch(86% .2 142 / .5); z-index: 2; }
+.det b { position: absolute; left: -2px; bottom: 100%; margin-bottom: 3px; background: var(--bright); color: var(--bright-ink); font-size: 11px; font-weight: 800; padding: 1px 6px; border-radius: 4px; white-space: nowrap; }

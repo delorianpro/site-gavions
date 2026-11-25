@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gavions — migração para Next.js
 
-## Getting Started
+Migração do site estático Gavions para App Router, React e TypeScript.
+Esta worktree contém a base, a estrutura visual e as interações: cabeçalho, 15 seções
+na ordem original, rodapé, ilustrações SVG e as cinco telas do app. O conteúdo
+é pré-renderizado por Server Components, com Inter local e estilos específicos
+em CSS Modules.
 
-First, run the development server:
+As cinco abas têm navegação por clique, setas, Home e End. Cabeçalho, animações
+de entrada e CTA móvel respondem à rolagem e à visibilidade. A simulação inicia
+com o observer original de limiar 0,4 e preserva os tempos de 30, 1700, 2300,
+2900, 3500, 4100, 4700 e 9000 ms; o replay cancela a execução anterior.
+
+O conteúdo e as telas ilustrativas continuam em Server Components, passados como
+filhos às fronteiras cliente. Hooks compartilham hidratação, media queries,
+movimento reduzido e observação de visibilidade. Sem JavaScript, o conteúdo não é
+ocultado por animações; a primeira tela do app e o FAQ nativo permanecem disponíveis.
+
+O formulário tem cinco etapas, validação, máscara brasileira, rascunho por aba,
+atribuição, transportes tipados e estados distintos de confirmação, falha e
+encaminhamento. Sem JavaScript ou antes da hidratação, campos desabilitados e sem
+nomes impedem exposição por GET. O contato original foi preservado: somente e-mail
+está configurado; abrir o aplicativo não confirma recebimento nem apaga o rascunho.
+
+O adaptador de métricas filtra os eventos originais sem instalar rastreadores.
+Contratos, correções autorizadas e limites estão em [docs/lead-form.md](docs/lead-form.md).
+
+## Desenvolvimento e validação
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev -- --hostname 127.0.0.1
+npm run lint
+npx tsc --noEmit
+npm run build
+npm audit
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Os estilos de componentes usam CSS Modules (`*.module.css`). O arquivo
+`app/globals.css` contém somente tokens e regras globais de base.
+Não há Tailwind, fontes remotas, SDKs de rastreamento ou backend de leads.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Recursos preservados
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `public/assets/img/`: marca, favicons, ícone Apple e imagem social originais.
+- `public/assets/fonts/`: Inter variável e licença SIL OFL 1.1.
+- `app/layout.tsx`: fonte via `next/font/local`, idioma `pt-BR`, metadados,
+  viewport e JSON-LD preservados do original.
 
-## Learn More
+Nenhum domínio, canonical ou endereço público definitivo foi definido.
+A imagem `public/assets/img/og-image.png` está preservada; sua URL de Open Graph
+será configurada quando o domínio for informado.
 
-To learn more about Next.js, take a look at the following resources:
+## Referência visual
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+As capturas em `docs/reference/original/` foram obtidas antes das alterações,
+com o original servido em modo somente leitura e isolado de destinos externos.
+O `manifest.json` registra navegador, viewports, requisições e erros observados.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Perfil | Viewport |
+| --- | --- |
+| Desktop | 1440 × 1000 |
+| Tablet horizontal | 1024 × 900 |
+| Tablet | 768 × 1024 |
+| Mobile | 390 × 844 |
+| Mobile estreito | 320 × 740 |
 
-## Deploy on Vercel
+Cada perfil possui captura da área visível e da página inteira. Desktop,
+tablet e mobile também possuem as cinco abas do app e o formulário vazio.
+São viewports de navegador, sem emulação específica de aparelho. Para tornar
+as imagens comparáveis, as seções foram reveladas por rolagem, as transições
+concluídas e as animações CSS contínuas pausadas em 2500 ms.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+O navegador usou perfil separado, bloqueio de requisições externas, apenas
+GET/HEAD locais, CSP restritiva e bloqueio de submissões e links externos.
+Nenhum formulário foi enviado e nenhum aplicativo de e-mail foi aberto.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Organização do código
+
+- `app/page.tsx`: composição do cabeçalho, das seções e do rodapé.
+- `components/layout/`: cabeçalho, rodapé e apresentação dos CTAs flutuantes.
+- `components/sections/`: as 15 seções e seus módulos de estilos próprios.
+- `components/app-preview/`: moldura, cabeçalhos, navegação, cenas e telas do app.
+- `components/icons/`: símbolos SVG únicos e ícones tipados que os referenciam.
+- `components/ui/`: botões, cartões, títulos de seção, imagens da marca e estilos
+  compartilhados pelos componentes.
+- `components/lead-form/`: apresentação e controle das cinco etapas e retornos.
+- `lib/leads/`: tipos, validação, formatação e transporte.
+- `lib/site-config.ts` e `lib/analytics.ts`: configuração e eventos filtrados.
+
+Os seletores compartilhados entre componentes usam atributos `data-*` locais
+ao componente ancestral, preservando as regras do original sem classes globais.
+Os hooks em `hooks/` compartilham hidratação, media queries, visibilidade, rascunho
+e atribuição. Não há rastreadores instalados.
+
+## QA reutilizável
+
+Os comandos e pré-requisitos estão em [scripts/qa/README.md](scripts/qa/README.md).
+A suíte usa dados fictícios, bloqueio de contatos externos e destinos interceptados.
+Caminhos, origem e portas locais são configuráveis; os artefatos são gerados fora
+do checkout. Não há instalação automática de ferramentas.
+
+As capturas históricas em `docs/reference/original/` e o relatório
+`docs/stage-1-validation.json` foram preservados localmente e excluídos pelo
+`info/exclude` compartilhado, com duas regras específicas autorizadas. Eles não
+são necessários para executar a aplicação. O `.gitignore` versionado foi preservado.
+
+A revisão técnica, os resultados e os limites de publicação estão em
+[docs/final-review.md](docs/final-review.md). Nenhum commit, push ou deploy foi
+realizado durante a migração; o versionamento depende de aprovação separada.

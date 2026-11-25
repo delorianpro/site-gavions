@@ -1,0 +1,4 @@
+.phone { --pw: 300px; position: relative; width: var(--pw); max-width: 100%; aspect-ratio: 300 / 630; padding: 10px; border-radius: 46px; background: linear-gradient(160deg, #2a2e2b, #0a0c0b 45%, #181b19); box-shadow: 0 0 0 1.5px #303532, 0 50px 90px -30px oklch(0% 0 0 / .85), 0 0 140px -40px oklch(62% .2 142 / .32); }
+.phone::before { content: ""; position: absolute; top: 20px; left: 50%; width: 30%; height: 22px; transform: translateX(-50%); background: #000; border-radius: 20px; z-index: 5; }
+.phoneScreen { position: relative; height: 100%; border-radius: 36px; overflow: hidden; background: #060807; container-type: inline-size; }
+@media (max-width: 360px) { .phone { --pw: 268px; } }

@@ -1,0 +1,7 @@
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 4px; cursor: pointer; font-weight: 650; font-size: 1.04rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary [data-icon] { font-size: 20px; color: var(--bright); transition: transform .25s ease; }
+.faq details[open] summary [data-icon] { transform: rotate(45deg); }
+.faq details p { padding: 0 4px 22px; color: var(--muted); max-width: 46em; }

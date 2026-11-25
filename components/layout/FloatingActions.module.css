@@ -1,0 +1,8 @@
+.mobileCta { position: fixed; z-index: 40; left: 0; right: 0; bottom: 0; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: oklch(15% .006 155 / .9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--line); transform: translateY(110%); transition: transform .3s ease; }
+.mobileCta.show { transform: none; }
+@media (min-width: 768px) { .mobileCta { display: none; } }
+.waFloat { position: fixed; z-index: 41; right: 18px; bottom: 18px; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--wa); color: #fff; box-shadow: 0 14px 30px -10px oklch(0% 0 0 / .7); transition: transform .2s, bottom .3s ease; }
+.waFloat[hidden] { display: none; }
+.waFloat:hover { transform: scale(1.06); }
+.waFloat [data-icon] { font-size: 30px; }
+@media (max-width: 767px) { .waFloat[data-cta-visible] { bottom: calc(82px + env(safe-area-inset-bottom)); } }

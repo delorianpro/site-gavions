@@ -1,0 +1,12 @@
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 10px 20px; border-radius: 14px; border: 1px solid transparent; font-weight: 700; font-size: .98rem; text-decoration: none; cursor: pointer; transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease; white-space: nowrap; }
+.btn:active { transform: translateY(1px); }
+.btn [data-icon] { font-size: 1.1em; }
+.btnPrimary { background: linear-gradient(135deg, var(--brand-hi), var(--brand) 55%, var(--brand-deep)); color: var(--bright-ink); box-shadow: 0 12px 32px -14px oklch(72% .24 142 / .7), 0 0 0 1px oklch(100% 0 0 / .18) inset; }
+.btnPrimary:hover { box-shadow: 0 16px 40px -12px oklch(76% .25 142 / .75), 0 0 0 1px oklch(100% 0 0 / .26) inset; transform: translateY(-1px); }
+.btnGhost { background: oklch(100% 0 0 / .04); border-color: var(--line-2); color: var(--text); }
+.btnGhost:hover { background: oklch(100% 0 0 / .08); border-color: oklch(100% 0 0 / .24); }
+.btnWa { background: var(--wa); color: #06260f; }
+.btnWa:hover { filter: brightness(1.06); }
+.btnSm { min-height: 40px; padding: 8px 16px; font-size: .9rem; border-radius: 12px; }
+.btnLg { min-height: 54px; padding: 14px 24px; font-size: 1.02rem; border-radius: 16px; }
+.btnBlock { width: 100%; }

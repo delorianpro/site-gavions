@@ -1,0 +1,5 @@
+.steps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); counter-reset: s; }
+.step { position: relative; padding: 26px 24px 24px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
+.step h3 { margin: 16px 0 8px; }
+.step p { color: var(--muted); font-size: .96rem; }
+.snum { position: absolute; top: 14px; right: 20px; font-size: 3.2rem; font-weight: 800; line-height: 1; color: transparent; -webkit-text-stroke: 1px oklch(86% .2 142 / .35); letter-spacing: -.04em; }
