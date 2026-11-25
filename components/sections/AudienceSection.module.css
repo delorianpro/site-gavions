@@ -1,2 +1,36 @@
-.seg { display: flex; }
-.seg span { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .35em; padding: .55em; border-radius: .7em; font-size: .78em; font-weight: 600; color: oklch(80% .012 150); }
+.grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.seg {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-align: left;
+}
+
+.seg span {
+  flex: none;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35em;
+  padding: .55em;
+  border-radius: .7em;
+  font-size: .78em;
+  font-weight: 600;
+  color: oklch(80% .012 150);
+}
+
+@media (min-width: 560px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1200px) {
+  .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}

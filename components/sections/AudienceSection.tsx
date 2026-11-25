@@ -8,7 +8,7 @@ export function AudienceSection() {
     <section className={`${shared.section} ${shared.alt}`} id="para-quem">
       <div className={shared.wrap}>
         <SectionHeading eyebrow="Para quem é" title="Feito para quem não pode ser pego de surpresa" />
-        <div className={`${shared.grid} ${shared.g5}`}>
+        <div className={`${shared.grid} ${styles.grid}`}>
           <FeatureCard delay={0} icon="building" title="Empresas e escritórios" className={styles.seg}>Vigilância fora do expediente e registro de quem liga e desliga a proteção.</FeatureCard>
           <FeatureCard delay={70} icon="warehouse" title="Galpões e indústrias" className={styles.seg}>Pátios grandes, docas e veículos entrando e saindo a noite toda.</FeatureCard>
           <FeatureCard delay={140} icon="hardhat" title="Canteiros de obra" className={styles.seg}>Material caro, local isolado e, muitas vezes, só internet 4G.</FeatureCard>
