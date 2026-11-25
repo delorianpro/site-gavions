@@ -1,0 +1,2 @@
+.seg { display: flex; }
+.seg span { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .35em; padding: .55em; border-radius: .7em; font-size: .78em; font-weight: 600; color: oklch(80% .012 150); }

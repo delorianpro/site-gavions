@@ -1,0 +1,13 @@
+.footer { border-top: 1px solid var(--line); background: oklch(12.5% .005 155); padding: 48px 0 24px; }
+.footerIn { display: grid; gap: 28px; }
+@media (min-width: 860px) { .footerIn { grid-template-columns: 1.4fr 1fr 1fr; } }
+.fLogo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.fLogo img { width: 150px; height: auto; }
+.fLogo .fLogoIcon { width: 58px; }
+.fBrand p { color: var(--muted); font-size: .92rem; max-width: 32em; }
+.fLinks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; font-size: .92rem; align-content: start; }
+.fLinks a, .fContact a { color: var(--muted); text-decoration: none; }
+.fLinks a:hover, .fContact a:hover { color: var(--text); }
+.fContact { display: flex; flex-direction: column; gap: 10px; font-size: .92rem; }
+.fContact a { display: inline-flex; align-items: center; gap: 8px; }
+.copy { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); color: oklch(60% .012 150); font-size: .82rem; }

@@ -1,0 +1,16 @@
+.dataCard { border-radius: 22px; background: var(--surface); border: 1px solid var(--line-2); padding: 24px; max-width: 480px; justify-self: center; width: 100%; box-shadow: 0 40px 80px -40px oklch(0% 0 0 / .9); }
+.dcHead { display: flex; gap: 14px; align-items: center; }
+.dcHead b { display: block; }
+.dcHead small { color: var(--muted); font-size: .86rem; }
+.dcBig { margin-top: 22px; color: var(--muted); }
+.dcBig b { font-size: 2rem; color: var(--text); letter-spacing: -.03em; margin-right: 4px; }
+.bar { height: 10px; border-radius: 99px; background: oklch(100% 0 0 / .08); margin-top: 10px; overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--bright), var(--ok)); }
+.dcSmall { font-size: .85rem; color: var(--muted); margin-top: 10px; }
+.dcBars { display: flex; align-items: flex-end; gap: 6px; height: 64px; margin-top: 18px; }
+.dcBars i { flex: 1; border-radius: 4px 4px 2px 2px; background: oklch(86% .2 142 / .45); }
+.dcBars i:last-child { background: var(--bright); }
+.dcRow { display: flex; gap: 12px; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .92rem; }
+.dcRow [data-icon] { font-size: 22px; color: var(--ok); }
+.dcRow small { display: block; color: var(--muted); font-size: .8rem; }
+.ticks { margin-top: 26px; }

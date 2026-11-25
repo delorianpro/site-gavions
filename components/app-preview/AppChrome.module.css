@@ -1,0 +1,18 @@
+.app { position: absolute; inset: 0; display: flex; flex-direction: column; font-size: 4.6cqw; line-height: 1.35; color: #fff; background: radial-gradient(120% 50% at 50% 0%, #0c230f, #060807 60%); }
+.app::before { content: "02:16"; display: block; height: 3.5em; padding: 1.15em 0 0 2em; font-size: .78em; font-weight: 700; flex: none; }
+.app [data-icon] { stroke-width: 2.1; }
+.appTop { padding: 0 .9em .55em; flex: none; }
+.appBrand { display: flex; align-items: center; justify-content: space-between; margin-bottom: .7em; }
+.appBrand img { height: 1.15em; width: auto; }
+.avatar { width: 2.1em; height: 2.1em; border-radius: 50%; display: grid; place-items: center; font-size: .72em; font-weight: 700; background: oklch(86% .2 142 / .18); color: var(--bright); }
+.appSelector { display: flex; gap: .5em; }
+.mapBtn { width: 2.75em; height: 2.75em; border-radius: 50%; display: grid; place-items: center; background: oklch(86% .2 142 / .16); color: var(--bright); flex: none; }
+.mapBtn [data-icon] { font-size: 1.15em; }
+.mapBtn.back { background: transparent; color: #fff; }
+.prop { flex: 1; min-width: 0; height: 2.75em; display: flex; align-items: center; justify-content: space-between; padding: 0 .9em; border-radius: .95em; background: oklch(100% 0 0 / .05); border: 1px solid oklch(100% 0 0 / .1); font-weight: 650; font-size: .95em; }
+.prop [data-icon] { color: var(--muted); }
+.appBody { flex: 1; min-height: 0; overflow: hidden; padding: .3em .9em .6em; display: flex; flex-direction: column; gap: .55em; }
+.appNav { flex: none; display: flex; justify-content: space-around; padding: .55em .3em 1.5em; border-top: 1px solid oklch(100% 0 0 / .08); background: oklch(15% .006 155 / .9); }
+.appNav span { display: flex; flex-direction: column; align-items: center; gap: .2em; font-size: .62em; color: oklch(72% .012 150); font-weight: 600; }
+.appNav [data-icon] { font-size: 1.95em; }
+.appNav .on { color: var(--bright); }

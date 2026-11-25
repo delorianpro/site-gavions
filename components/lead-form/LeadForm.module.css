@@ -1,0 +1,51 @@
+.formCard { position: relative; border-radius: 24px; background: linear-gradient(180deg, oklch(100% 0 0 / .035), transparent 30%), var(--surface); border: 1px solid var(--line-2); padding: clamp(20px, 3vw, 32px); box-shadow: 0 50px 100px -50px oklch(0% 0 0 / .95), 0 0 140px -60px oklch(62% .2 142 / .34); }
+.formCard h3 { font-size: 1.35rem; letter-spacing: -.02em; }
+.formHint { color: var(--muted); font-size: .92rem; margin: 4px 0 20px; }
+.formProgress { margin-bottom: 24px; }
+.formProgress [data-step-status] { font-size: .82rem; font-weight: 650; color: var(--bright); }
+.formProgress progress { display: block; width: 100%; height: 5px; margin: 10px 0; border: 0; border-radius: 99px; overflow: hidden; background: var(--line); accent-color: var(--bright); }
+.formProgress progress::-webkit-progress-bar { background: var(--line); }
+.formProgress progress::-webkit-progress-value { background: var(--bright); border-radius: 99px; }
+.formProgress progress::-moz-progress-bar { background: var(--bright); border-radius: 99px; }
+.stepHint { color: var(--muted); font-size: .84rem; margin-bottom: 16px; }
+.formStep h4 { font-size: 1.08rem; margin-bottom: 18px; }
+.formActions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.formActions [data-variant="primary"] { flex: 1; min-width: 0; white-space: normal; }
+.formCard [hidden] { display: none; }
+.field { margin: 0 0 16px; border: 0; padding: 0; min-width: 0; }
+.field label, .field legend { display: block; font-size: .9rem; font-weight: 650; margin-bottom: 7px; padding: 0; }
+.opt { color: var(--muted); font-weight: 450; }
+.field input, .field textarea { width: 100%; min-height: 48px; padding: 12px 14px; border-radius: 13px; border: 1px solid var(--line-2); background: oklch(12.5% .005 155); transition: border-color .2s, box-shadow .2s; }
+.field textarea { resize: vertical; min-height: 84px; }
+.field input::placeholder, .field textarea::placeholder { color: oklch(55% .012 150); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--bright); box-shadow: 0 0 0 4px oklch(86% .2 142 / .18); }
+.row2 { display: grid; gap: 0 14px; }
+@media (min-width: 560px) { .row2 { grid-template-columns: 1fr 1fr; } }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pills label { position: relative; margin: 0; font-weight: 550; }
+.pills input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pills span { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 14px; border-radius: 12px; border: 1px solid var(--line-2); background: oklch(12.5% .005 155); font-size: .88rem; cursor: pointer; transition: border-color .2s, background .2s, color .2s; }
+.pills span:hover { border-color: oklch(100% 0 0 / .26); }
+.pills input:checked + span { border-color: var(--bright); background: oklch(86% .2 142 / .16); color: #fff; }
+.pills input:focus-visible + span { outline: 2px solid var(--bright); outline-offset: 2px; }
+.err { display: none; color: var(--danger); font-size: .84rem; margin-top: 6px; }
+.err.show { display: block; }
+.consent { display: flex; gap: 12px; align-items: flex-start; font-size: .86rem; color: var(--muted); margin: 6px 0 4px; cursor: pointer; }
+.consent input { width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--bright); flex: none; }
+.consentError { margin: 2px 0 10px 32px; }
+.formCard [data-submit] { margin-top: 0; }
+.formCard [data-submit][disabled] { opacity: .7; cursor: progress; }
+.formStatus { min-height: 1.4em; margin-top: 10px; font-size: .9rem; color: var(--muted); text-align: center; }
+.formStatus.bad { color: var(--danger); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.cfgWarning { margin: -4px 0 18px; padding: 12px 14px; border-radius: 12px; border: 1px dashed oklch(79% .16 75 / .7); background: oklch(79% .16 75 / .08); color: oklch(88% .1 80); font-size: .86rem; }
+.thanks { text-align: center; padding: 18px 4px; display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+.thanks[hidden] { display: none; }
+.thanks:focus { outline: none; }
+.thanksIc { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; margin: 0 auto 6px; background: oklch(74% .19 150 / .16); color: var(--ok); }
+.thanksIc [data-icon] { font-size: 32px; stroke-width: 2.6; }
+.thanks h3 { font-size: 1.5rem; }
+.thanks p { color: var(--muted); margin-bottom: 8px; }
+
+.controls { display: contents; border: 0; margin: 0; padding: 0; min-width: 0; }
+.field input[aria-invalid="true"]:not([type="radio"]), .field textarea[aria-invalid="true"] { border-color: var(--danger); }
