@@ -55,6 +55,8 @@ node scripts/qa/leads.mjs
 node scripts/qa/leads-api.mjs
 node scripts/qa/client-secrets.mjs
 node scripts/qa/black-friday.mjs
+node scripts/qa/seo.mjs
+node scripts/qa/back-to-top.mjs
 node scripts/qa/form.mjs
 node scripts/qa/interactions.mjs
 node scripts/qa/page.mjs
@@ -90,12 +92,18 @@ a regressão da aplicação disponível em checkouts que não tenham o site anti
 | `black-friday.mjs` | Regressão do calendário, contador e retomada da campanha |
 | `interactions.mjs` | Cabeçalho, abas, FAQ, reveals, CTA móvel, sequência/replay/limpeza da simulação e movimento reduzido |
 | `page.mjs` | Avisos/proporções das imagens em oito larguras, metadados, IDs, alt, reflow, ano e fallback sem JS |
+| `seo.mjs` | HTML HTTP inicial sem navegador, grafo JSON-LD, referências, URLs oficiais, omissão de abrangência ainda não visível, PNG do logotipo e serialização contra fechamento de script |
+| `back-to-top.mjs` | Limite de rolagem, teclado, colisão com CTA, retorno ao topo com movimento reduzido e fallback sem JavaScript/IntersectionObserver em desktop e mobile |
 | `simulation.mjs` | Contraste sobre fundos rasterizados reais, estados parciais/concluídos, replay, movimento reduzido e capturas |
 | `accessibility.mjs` | Axe nos estados pendente e concluído; verificações inconclusivas continuam explícitas |
 | `visual.mjs` | Comparação da geometria das seções e das cinco telas ilustrativas com o original |
 
 `browser.mjs` centraliza CDP, isolamento, instrumentação e os mocks; `config.mjs`
 centraliza caminhos, origem local e configuração fictícia. Não são comandos de teste.
+`structured-data.mjs` compartilha as asserções do grafo entre `seo.mjs` e
+`page.mjs`; este também verifica o JSON-LD após hidratação e com JavaScript desativado.
+`seo.mjs` requer somente a aplicação local e TypeScript já instalado; não exige navegador,
+não chama rotas de leads e não consulta serviços externos.
 
 A simulação usa temporizadores controlados apenas no navegador de QA para manter
 instantes equivalentes durante a amostragem. A regressão de interações também

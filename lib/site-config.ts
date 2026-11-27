@@ -1,5 +1,7 @@
 import type { LeadConfig } from "./leads/types";
 
+export const siteUrl = "https://www.gavions.com";
+
 // Public contact details and the same-origin form endpoint; never put secrets here.
 export const siteConfig = {
   leads: {
