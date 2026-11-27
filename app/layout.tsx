@@ -14,6 +14,9 @@ const inter = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  verification: {
+    google: "vkycw8JDqnlJQ-a3siziU70JQUAAWcjPgcT9-rhzgrA",
+  },
   icons: {
     icon: [
       { url: "/assets/img/favicon-32.png", sizes: "32x32", type: "image/png" },
