@@ -15,10 +15,7 @@ const inter = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   verification: {
-    google: [
-      "vkycw8JDqnlJQ-a3siziU70JQUAAWcjPgcT9-rhzgrA",
-      "HY43cJzTIZ52sTMtA9UuiaJHtEKQhkxJXLv5gr9GXNw",
-    ],
+    google: "HY43cJzTIZ52sTMtA9UuiaJHtEKQhkxJXLv5gr9GXNw",
   },
   icons: {
     icon: [
